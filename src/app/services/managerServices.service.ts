@@ -25,34 +25,6 @@ export class RoomService{
   private roomTypes = ['Single', 'Double', 'Suite', 'Deluxe', 'Standard Single', 'Standard Double', 'Deluxe Single', 'Deluxe Double', 'Presidential Suite', 'Family Room', 'Business Room'];
   private hotelChains = ['Marriott', 'Park Hyatt', 'Taj', 'ITC', 'Oberoi', 'Hilton', 'Radisson', 'Leela', 'JW Marriott', 'Four Seasons'];
   
-  // Available hotels for maintenance management
-  private availableHotels = [
-    'Grand Palace Hotel',
-    'Ocean View Resort', 
-    'City Center Inn',
-    'Mountain Lodge',
-    'Sunset Beach Hotel',
-    'Downtown Business Hotel',
-    'Riverside Resort',
-    'Garden View Inn',
-    'Metropolitan Hotel',
-    'Lakeside Resort'
-  ];
-
-  // Available locations for maintenance management
-  private availableMaintenanceLocations = [
-    'Downtown',
-    'Beachfront',
-    'Business District', 
-    'Mountain Area',
-    'City Center',
-    'Riverside',
-    'Suburbs',
-    'Airport Area',
-    'Historic District',
-    'Entertainment District'
-  ];
- 
   getLocations():LocationInterface[]{
     return this.locations
   }
@@ -83,30 +55,5 @@ export class RoomService{
   getTotalHotels(): number {
     return this.hotelDataService.getHotelsCount();
   }
-
-  // Methods for maintenance management
-  getAvailableHotels(): string[] {
-    return this.availableHotels;
-  }
-
-  getAvailableMaintenanceLocations(): string[] {
-    return this.availableMaintenanceLocations;
-  }
-
-  // Method to add new hotels to the available list
-  addAvailableHotel(hotelName: string): void {
-    if (!this.availableHotels.includes(hotelName)) {
-      this.availableHotels.push(hotelName);
-    }
-  }
-
-  // Method to add new locations to the available list
-  addAvailableLocation(location: string): void {
-    if (!this.availableMaintenanceLocations.includes(location)) {
-      this.availableMaintenanceLocations.push(location);
-    }
-  }
- 
 }
- 
- 
+

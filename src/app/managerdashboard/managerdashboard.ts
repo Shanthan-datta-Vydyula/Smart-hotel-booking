@@ -28,20 +28,12 @@ export class ManagerDashboardComponent implements OnInit {
   
  
   availableHotels: string[] = [];
-  availableLocations: string[] = [];
 
   constructor() {}
 
   ngOnInit(): void {
     console.log('ManagerDashboardComponent (Parent) initialized');
     this.loadDashboardStats();
-    this.loadServiceData();
-  }
-
-  private loadServiceData(): void {
-    this.availableHotels = this.managerService.getAvailableHotels();
-    this.availableLocations = this.managerService.getAvailableMaintenanceLocations();
-    console.log('Loaded hotels and locations from service');
   }
 
   showAddHotel() {
