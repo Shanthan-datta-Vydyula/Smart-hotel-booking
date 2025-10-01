@@ -9,6 +9,7 @@ import { BookingDetails } from '../booking-details/booking-details';
   imports: [CommonModule, BookingDetails],
   templateUrl: './booking.html',
   styleUrl: './booking.css',
+  standalone: true
 })
 export class Booking implements OnInit {
   @Input() hotel: any;
@@ -17,7 +18,7 @@ export class Booking implements OnInit {
   
   @Input() checkIn: string = '';
   @Input() checkOut: string = '';
-  openBookingDetails: boolean = false;
+  openBookingDetails: boolean = true;
   
   constructor(private router: Router) {}
  
@@ -29,6 +30,9 @@ export class Booking implements OnInit {
       this.hotel = bookingData.hotel;
       this.checkIn = bookingData.checkInDate;
       this.checkOut = bookingData.checkOutDate;
+      this.openBookingDetails = true;
+    } else {
+      console.error('No booking data found in session storage');
     }
     console.log('Hotel:', this.hotel);
   }

@@ -26,46 +26,10 @@ export class ManagerAddUserComponent implements OnInit {
   numberOfGuests: number = 1;
   specialRequests: string = '';
 
-  // Validation properties
-  showFormErrors: boolean = false;
-
-  // Dropdown options (same as maintenance hotels for consistency)
-  locations: string[] = [
-    'Downtown',
-    'Beachfront',
-    'Business District', 
-    'Mountain Area',
-    'City Center',
-    'Riverside',
-    'Suburbs',
-    'Airport Area',
-    'Historic District',
-    'Entertainment District'
-  ];
-
-  hotels: string[] = [
-    'Grand Palace Hotel',
-    'Ocean View Resort', 
-    'City Center Inn',
-    'Mountain Lodge',
-    'Sunset Beach Hotel',
-    'Downtown Business Hotel',
-    'Riverside Resort',
-    'Garden View Inn',
-    'Metropolitan Hotel',
-    'Lakeside Resort'
-  ];
-
-  roomTypes: string[] = [
-    'Standard Single',
-    'Standard Double',
-    'Deluxe Single',
-    'Deluxe Double',
-    'Suite',
-    'Presidential Suite',
-    'Family Room',
-    'Business Room'
-  ];
+  // Dropdown options from service
+  locations: string[] = [];
+  hotels: string[] = [];
+  roomTypes: string[] = [];
 
   today: string = '';
 
@@ -74,10 +38,15 @@ export class ManagerAddUserComponent implements OnInit {
   ngOnInit(): void {
     // Initialize today's date
     this.today = this.managerAddUserService.getTodayDate();
+    
+    // Initialize dropdown options from service
+    this.locations = this.managerAddUserService.locations;
+    this.hotels = this.managerAddUserService.hotels;
+    this.roomTypes = this.managerAddUserService.roomTypes;
   }
 
   onSubmit(form: NgForm) {
-    if (this.isFormValid() && this.areDatesValid()) {
+    if (form.valid) {
       const bookingData: UserBookingData = {
         name: this.userName,
         email: this.userEmail,
@@ -96,59 +65,19 @@ export class ManagerAddUserComponent implements OnInit {
         alert(`User booking created successfully! Booking ID: ${bookingId}`);
         this.userAdded.emit(bookingData);
         this.resetForm(form);
-        this.showFormErrors = false;
       } catch (error) {
         console.error('Error creating user booking:', error);
         alert('Failed to create user booking. Please try again.');
       }
     } else {
-      this.showFormErrors = true;
-      console.log('Form validation failed. Please fill in all required fields.');
+      alert('Please fill in all required fields.');
     }
   }
 
-  private isFormValid(): boolean {
-    return this.userName.trim() !== '' &&
-           this.userEmail.trim() !== '' &&
-           this.userPhone.trim() !== '' &&
-           this.checkInDate !== '' &&
-           this.checkOutDate !== '' &&
-           this.selectedLocation !== '' &&
-           this.selectedHotel !== '' &&
-           this.selectedRoomType !== '';
-  }
-
-  areDatesValid(): boolean {
-    if (!this.checkInDate || !this.checkOutDate) return false;
-    const checkIn = new Date(this.checkInDate);
-    const checkOut = new Date(this.checkOutDate);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    return checkIn >= today && checkOut > checkIn;
-  }
-
-  getNumberOfNights(): number {
-    if (!this.checkInDate || !this.checkOutDate) return 0;
-    const checkIn = new Date(this.checkInDate);
-    const checkOut = new Date(this.checkOutDate);
-    const timeDiff = checkOut.getTime() - checkIn.getTime();
-    return Math.ceil(timeDiff / (1000 * 3600 * 24));
-  }
-
   resetForm(form: NgForm) {
-    form.resetForm();
-    this.userName = '';
-    this.userEmail = '';
-    this.userPhone = '';
-    this.checkInDate = '';
-    this.checkOutDate = '';
-    this.selectedLocation = '';
-    this.selectedHotel = '';
-    this.selectedRoomType = '';
-    this.numberOfGuests = 1;
-    this.specialRequests = '';
-    this.showFormErrors = false;
+    form.resetForm({
+      numberOfGuests: 1
+    });
   }
 
   onClose() {

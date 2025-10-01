@@ -98,18 +98,18 @@ updateSearchLabel() {
 }
  
 bookHotel(hotel:HotelInterface) {
-  this.selectedHotel=hotel;
-   const bookingData = {
+  this.selectedHotel = hotel;
+  const bookingData = {
     hotel: hotel,
     checkInDate: this.checkInDate,
     checkOutDate: this.checkOutDate
   };
   
- 
+  // Store booking data before navigation
+  sessionStorage.setItem('bookingData', JSON.stringify(bookingData));
   
   // Navigate to booking component
   this.router.navigate(['/booking']);
-  
   
   this.hotelSelected.emit(bookingData);
 }

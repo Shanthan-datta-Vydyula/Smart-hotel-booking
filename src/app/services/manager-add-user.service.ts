@@ -47,21 +47,8 @@ export class ManagerAddUserService {
     return bookingId;
   }
 
-  // Get all bookings
-  getAllBookings(): UserBookingData[] {
-    return this.bookings;
-  }
-
   // Get today's date
   getTodayDate(): string {
     return new Date().toISOString().split('T')[0];
-  }
-
-  // Calculate nights between dates
-  calculateNumberOfNights(checkInDate: string, checkOutDate: string): number {
-    if (!checkInDate || !checkOutDate) return 0;
-    const checkIn = new Date(checkInDate);
-    const checkOut = new Date(checkOutDate);
-    return checkOut > checkIn ? Math.ceil((checkOut.getTime() - checkIn.getTime()) / (1000 * 60 * 60 * 24)) : 0;
   }
 }

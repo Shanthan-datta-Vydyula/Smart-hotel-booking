@@ -37,22 +37,22 @@ export class ManagerDashboardComponent implements OnInit {
   }
 
   showAddHotel() {
-    console.log('Navigating to Add Hotel child component');
+    
     this.currentView = 'add-hotel';
   }
 
   showAddUser() {
-    console.log('Navigating to Add User child component');
+    
     this.currentView = 'add-user';
   }
 
   backToHub() {
-    console.log('Returning to Dashboard hub from child component');
+   
     this.currentView = 'hub';
   }
 
   goHome() {
-    console.log('Manager Dashboard navigating to home');
+   
     this.router.navigate(['/home']);
   }
 
