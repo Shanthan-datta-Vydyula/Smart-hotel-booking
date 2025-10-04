@@ -92,9 +92,8 @@ export class AuthService {
       };
     }
 
-    // For demo purposes, accept any email for manager login
-    // You can implement proper logic here later
-    const isManager = true; // Simplified for demo
+    
+    const isManager = true; 
 
     const loginSuccess = this.login(email, password);
     

@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { ManagerAddHotelComponent } from '../manager-add-hotel/manager-add-hotel';
 import { ManagerAddUserComponent } from '../manager-add-user/manager-add-user';
 import { UserBookingData } from '../services/manager-add-user.service';
-import { RoomService } from '../services/managerServices.service';
 
 @Component({
   selector: 'app-managerdashboard',
@@ -16,7 +15,6 @@ import { RoomService } from '../services/managerServices.service';
 })
 export class ManagerDashboardComponent implements OnInit {
   
-  private managerService = inject(RoomService);
   private router = inject(Router);
   
  
@@ -33,7 +31,7 @@ export class ManagerDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('ManagerDashboardComponent (Parent) initialized');
-    this.loadDashboardStats();
+    
   }
 
   showAddHotel() {
@@ -68,8 +66,8 @@ export class ManagerDashboardComponent implements OnInit {
     this.backToHub();
   }
 
-  private loadDashboardStats() {
-    console.log('Loading dashboard statistics...');
-  }
+  // private loadDashboardStats() {
+  //   console.log('Loading dashboard statistics...');
+  // }
 
 }

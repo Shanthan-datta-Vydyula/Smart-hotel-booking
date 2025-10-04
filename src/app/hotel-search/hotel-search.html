@@ -14,22 +14,26 @@
         />
    
         <!-- Dates section -->
-        <input 
-          type="date" 
-          name="checkInDate"
-          [min]="today" 
-          [(ngModel)]="checkInDate" 
-          placeholder="Check-in date" 
-          required 
-        />
-        <input 
-          type="date" 
-          name="checkOutDate"
-          [min]="checkInDate" 
-          [(ngModel)]="checkOutDate" 
-          placeholder="Check-out date" 
-          required 
-        />
+        <div class="date-input">
+          <label>Check-in Date</label>
+          <input 
+            type="date" 
+            name="checkInDate"
+            [min]="today" 
+            [(ngModel)]="checkInDate" 
+            required 
+          />
+        </div>
+        <div class="date-input">
+          <label>Check-out Date</label>
+          <input 
+            type="date" 
+            name="checkOutDate"
+            [min]="checkInDate" 
+            [(ngModel)]="checkOutDate" 
+            required 
+          />
+        </div>
 
         <!-- Guest selection -->
         <!-- .stopPropogation stops the bubbling up the code -->

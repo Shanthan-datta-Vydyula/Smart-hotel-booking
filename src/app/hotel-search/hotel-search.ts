@@ -11,7 +11,7 @@ import { HotelInterface } from '../interfaces/hotelInterface';
 @Component({
   selector: 'app-hotel-search',
   standalone: true,
-  imports: [CommonModule, FormsModule, HotelFilterPipe, GuestSelectorComponent],
+  imports: [CommonModule, FormsModule, HotelFilterPipe, GuestSelectorComponent, Booking],
   templateUrl: './hotel-search.html',
   styleUrls: ['./hotel-search.css']
 })

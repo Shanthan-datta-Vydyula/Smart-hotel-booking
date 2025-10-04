@@ -18,7 +18,7 @@ export class Booking implements OnInit {
   
   @Input() checkIn: string = '';
   @Input() checkOut: string = '';
-  openBookingDetails: boolean = true;
+  openBookingDetails: boolean = false;
   
   constructor(private router: Router) {}
  
@@ -30,7 +30,7 @@ export class Booking implements OnInit {
       this.hotel = bookingData.hotel;
       this.checkIn = bookingData.checkInDate;
       this.checkOut = bookingData.checkOutDate;
-      this.openBookingDetails = true;
+      this.openBookingDetails = false;
     } else {
       console.error('No booking data found in session storage');
     }
@@ -38,6 +38,7 @@ export class Booking implements OnInit {
   }
  
   confirmBooking() {
+    // First show booking confirmation, then proceed to details
     this.openBookingDetails = true;
     this.bookingConfirmed.emit({
       hotel: this.hotel,
@@ -47,9 +48,12 @@ export class Booking implements OnInit {
   }
  
   closeBooking() {
+    if (this.openBookingDetails) {
+      this.router.navigate(['/user-dashboard']);
+    } else {
+      this.router.navigate(['/hotel-search']);
+    }
     this.close.emit();
-    
-    this.router.navigate(['/user-dashboard']);
   }
   
   goBack() {
